@@ -54,3 +54,5 @@ instance Group Hyperbola where
  - the group structure of the real numbers
  - with respect to * and 1.
  -}
+
+{- All the groups in this document are _commutative_ groups! -}
