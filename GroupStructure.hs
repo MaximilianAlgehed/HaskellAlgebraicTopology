@@ -10,18 +10,28 @@ class Group a where
  -}
 
 -- | The group on a circle
-data Circle = Polar Double
+data Circle = Param Double
 -- a `Circle` can be taken to the
--- unit circle by (Circle theta) -> (realPart exp(i*theta), imagPart exp(i*theta))
+-- unit circle by (Circle h) -> ((1-h^2)/(1+h^2), 2*h/(1+h^2))
+--
+-- This parameterization can be derived from
+-- observing the line that goes from
+-- (-1,0) -> (x,y) -> (0,h) where (x,y) on the circle.
 
 instance Group Circle where
-    zero = Polar 0
-    add (Polar x) (Polar y) = Polar (x+y)
-    inv (Polar x) = Polar (-x)
+    zero = Param 0
+    add (Param h1) (Param h2) = Param $ (h1+h2)/(1-h1*h2)
+    inv (Param h) = Param (-h)
 
-{- Adherence to the laws follows from
- - the group structure of the real numbers
- - with respect to + and 0.
+{- Proving the laws for the group
+ - is left as an excercise for the reader...
+ -
+ - This group interpertation is dervied
+ - from the idea of parallel lines between
+ - two points. The idea is that it is
+ - isomorphic to the e^(i*theta) interpertation
+ - (but it works with only rational numbers,
+ - if you like that)
  -}
 
 -- | The group on the parabola y = x^2
